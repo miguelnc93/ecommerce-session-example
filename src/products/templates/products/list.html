@@ -1,0 +1,8 @@
+{{object_list}}<br>
+
+{% for item in object_list %}
+
+<a href="{{ item.get_absolute_url }}">{{item.title}}</a><br>
+{# <a href="{% url 'detail' slug=item.slug %}">REVERSE URL --> {{item.title}}</a><br> #}
+
+{% endfor %}

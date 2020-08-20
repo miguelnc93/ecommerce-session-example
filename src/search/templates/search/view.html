@@ -1,0 +1,21 @@
+{% if request.GET.q %}
+<div>
+    buscando por {{request.GET.q}}
+    <hr>
+</div>
+{% else %}
+
+{% endif %}
+<div>
+    <form action="{% url 'search:query' %}" method="get">
+        {# se debe respetar el name = "q" para que funcione bien la busqueda #}
+        <input type="text" name="q" id="buscar_q" placeholder="Buscar: " value="{{request.GET.q}}">
+        <button type="submit">Buscar</button>
+    </form>
+</div>
+{% for item in object_list %}
+
+<a href="{{ item.get_absolute_url }}">{{item.title}}</a><br>
+{# <a href="{% url 'detail' slug=item.slug %}">REVERSE URL --> {{item.title}}</a><br> #}
+
+{% endfor %}
