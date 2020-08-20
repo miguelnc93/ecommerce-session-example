@@ -1,0 +1,16 @@
+{{object.title}}<br>
+{{object.description}}<br>
+{{object.price}}<br>
+{% if object.image %}
+<img src="{{object.image.url}}" alt="">
+{% endif %}
+<div>
+    <h1>cart object</h1>
+    {{cart}}
+    {% if object in cart.products.all %}
+    <button>Remove</button>
+    {% else %}
+    <button>Add to cart</button>
+    {%endif%}
+</div>
+

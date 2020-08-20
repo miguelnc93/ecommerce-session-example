@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}MANCShop - Inicio{% endblock %}
+{% block carousel %}
+    {% include 'utils/carousel.html' %}
+{% endblock %}
+{% block content %}
+<section id="productos_categorias">
+    <div class="contenedor">
+        <div id="categoria1">
+            <a href="">
+                <h1>Mujer</h1>
+            </a>
+        </div>
+        <div id="categoria2">
+            <a href="">
+                <h1>Hombre</h1>
+            </a>
+        </div>
+        <div id="categoria3">
+            <a href="">
+                <h1>Mercado</h1>
+            </a>
+        </div>
+    </div>
+   </section>
+{% endblock %}
