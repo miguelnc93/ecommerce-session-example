@@ -188,7 +188,7 @@ justify-content: space-between;
   <body>
       <div id="contenedor_pagina">
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <a class="navbar-brand mb-0 h1" href="#"><span style="color:rgba(209, 31, 0, 1);">MANC</span><span style="color:black;">Shop</span></a>
+            <a class="navbar-brand mb-0 h1" href="{% url 'home' %}"><span style="color:rgba(209, 31, 0, 1);">MANC</span><span style="color:black;">Shop</span></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -206,7 +206,7 @@ justify-content: space-between;
                           {{ request.user.username }}
                         </a>
                         <div class="dropdown-menu dropdown_logout" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="{% url 'login' %}">Cerrar Sesión</a>
+                          <a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a>
                         </div>
                       </li>
                     {% else %}

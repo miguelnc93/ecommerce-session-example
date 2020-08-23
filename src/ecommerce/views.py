@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -48,12 +48,16 @@ def login_page(request):
             print(request.user.is_authenticated)
             login(request, user)
             context["form"] = LoginForm() #limpiar formulario
-            return redirect("/login")
+            return redirect("home")
         else:
             print("error")
 
     return render(request,"auth/login.html", context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+    
 def register_page(request):
     form = RegisterForm(request.POST or None)
     context = {
