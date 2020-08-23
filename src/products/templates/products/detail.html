@@ -1,16 +1,66 @@
-{{object.title}}<br>
-{{object.description}}<br>
-{{object.price}}<br>
-{% if object.image %}
-<img src="{{object.image.url}}" alt="">
-{% endif %}
-<div>
-    <h1>cart object</h1>
-    {{cart}}
-    {% if object in cart.products.all %}
-    <button>Remove</button>
-    {% else %}
-    <button>Add to cart</button>
-    {%endif%}
-</div>
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    section#detalle_producto{
+        /* border: 2px solid red; */
+    }
+
+    section#detalle_producto .contenedor{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding: 20px;
+        /* border: 2px solid black; */
+    }
+
+    section#detalle_producto .contenedor div{
+        flex-basis: 50%;
+        /* border: 2px solid purple; */
+        padding: 20px;
+    }
+
+    section#detalle_producto img{
+        width: 100%;
+    }
+
+    @media (min-width: 630px){
+        section#detalle_producto .contenedor{
+            flex-direction: row;
+        }
+    }
+</style>
+<br>
+<br>
+<br>
+<p>
+    <a href="javascript:history.back()" style="text-decoration: none;"><-- Regresar a productos</a>
+</p>
+<section id="detalle_producto">
+    <div class="contenedor">
+        <div>
+            {% if object.image %}
+                <img src="{{ object.image.url }}" alt="">
+            {% else %}
+                <center>
+                    <img src="https://www.latiendadirecta.es/images/ampliar/no_encontrado.jpg" alt="no_encontrado">
+                </center>
+            {% endif %}
+        </div>
+        <div>
+            <h1>{{object.title}}</h1>
+            <p>{{object.description}}</p>
+            <h5>$ {{object.price}}</h5><br>
+            <div>
+                <h1>cart object</h1>
+                {{cart}}
+                {% if object in cart.products.all %}
+                <button>Remove</button>
+                {% else %}
+                <button>Add to cart</button>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
 

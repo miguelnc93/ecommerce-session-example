@@ -30,8 +30,9 @@ urlpatterns = [
     url(r'^about/$', about_page),
     url(r'^contact/$', contact_page),
     url(r'^login/$', login_page, name="login"),
+    url(r'^logout/$', logout_view, name="logout"),
     url(r'^register/$', register_page, name="register"),
-    url(r'^products/', include("products.urls")),
+    url(r'^products/', include("products.urls",namespace="product")),
     url(r'^search/', include("search.urls", namespace="search")),
     url(r'^cart/', include("carts.urls", namespace="cart")),
 ]

@@ -14,14 +14,41 @@ class ProductFeatureListView(ListView):
 class ProductFeatureDetailView(DetailView):
     #Ademas de estos filter que agregue, esta clase DetailView automaticamente agrega el filter por pk
     #que se le manda por medio de la URL
-    queryset = Product.objects.filter(featured=True, active=True)
+    queryset = Product.objects.filter(featured=True, active=True) 
     template_name = "products/featured-detail.html"
 
-
-
-class ProductListView(ListView):
-    queryset = Product.objects.all()
+class ProductWomenFeatureListView(ListView):
+    queryset = Product.objects.filter(featured=True, active=True, categoria="MUJER")
     template_name = "products/list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductWomenFeatureListView,self).get_context_data(*args,**kwargs)
+        context['categoria'] = "Mujer"
+        return context
+
+class ProductMenFeatureListView(ListView):
+    queryset = Product.objects.filter(featured=True, active=True, categoria="HOMBRE")
+    template_name = "products/list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductMenFeatureListView,self).get_context_data(*args,**kwargs)
+        context['categoria'] = "Hombre"
+        return context
+
+class ProductGroceriesFeatureListView(ListView):
+    queryset = Product.objects.filter(featured=True, active=True, categoria="MERCADO")
+    template_name = "products/list.html"
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ProductGroceriesFeatureListView,self).get_context_data(*args,**kwargs)
+        context['categoria'] = "Mercado"
+        return context
+
+    
+
+# class ProductListView(ListView):
+#     queryset = Product.objects.all()
+#     template_name = "products/list.html"
 
     # def get_context_data(self, *args, **kwargs):
     #     context = super(ProductListView,self).get_context_data(*args,**kwargs)
@@ -35,15 +62,15 @@ class ProductListView(ListView):
             #as the method below
 
 
-def product_list_view(request):
-    queryset = Product.objects.all()
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "products/list.html",context)
+# def product_list_view(request):
+#     queryset = Product.objects.all()
+#     context = {
+#         "object_list": queryset
+#     }
+#     return render(request, "products/list.html",context)
 
 class ProductDetailSlugView(DetailView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.filter(featured=True, active=True)
     template_name = "products/detail.html"
 
     def get_context_data(self, *args, **kwargs):
@@ -54,9 +81,9 @@ class ProductDetailSlugView(DetailView):
 
 
 
-class ProductDetailView(DetailView):
-    queryset = Product.objects.all()
-    template_name = "products/detail.html"
+# class ProductDetailView(DetailView):
+#     queryset = Product.objects.all()
+#     template_name = "products/detail.html"
 
     # def get_context_data(self, *args, **kwargs):
     #     context = super(ProductDetailView,self).get_context_data(*args,**kwargs)
@@ -67,15 +94,15 @@ class ProductDetailView(DetailView):
             #as the method below
 
 
-def product_detail_view(request,pk):
-    print(pk)
-    #instance = Product.objects.get(pk=pk)
-    #instance = get_object_or_404(Product,pk=pk)
-    try:
-        instance = Product.objects.get(id=pk)
-    except Product.DoesNotExist:
-        raise Http404("Product doesnt exist")
-    context = {
-        "object": instance
-    }
-    return render(request, "products/detail.html",context)
+# def product_detail_view(request,pk):
+#     print(pk)
+#     #instance = Product.objects.get(pk=pk)
+#     #instance = get_object_or_404(Product,pk=pk)
+#     try:
+#         instance = Product.objects.get(id=pk)
+#     except Product.DoesNotExist:
+#         raise Http404("Product doesnt exist")
+#     context = {
+#         "object": instance
+#     }
+#     return render(request, "products/detail.html",context)

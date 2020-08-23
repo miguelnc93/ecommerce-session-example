@@ -1,8 +1,53 @@
-{{object_list}}<br>
+{% extends 'base.html' %}
+{% block content %}
+<style>
+section#lista_productos{
+    /* border: 2px solid red;
+    background-color: red; */
+}
+section#lista_productos .contenedor{
+    width: 100%;
+    padding: 20px;
+    /* border: 2px solid yellow; */
+    display: flex;
+    flex-direction: column; /*row*/
+    flex-wrap: wrap;
+    text-align: center;
+}
 
-{% for item in object_list %}
+section#lista_productos .contenedor article{
+    /* border: 2px solid pink; */
+    flex-basis:33%;
+    padding: 30px;
+    
+}
 
-<a href="{{ item.get_absolute_url }}">{{item.title}}</a><br>
-{# <a href="{% url 'detail' slug=item.slug %}">REVERSE URL --> {{item.title}}</a><br> #}
+@media (min-width: 768px){
+    section#lista_productos .contenedor{
+        flex-direction: row;
+    }
+}
 
-{% endfor %}
+</style>
+<br><br><br>
+<h4 style="text-align: center;">{{ categoria }}</h4>
+<section id="lista_productos">
+    <div class="contenedor">
+        {% for item in object_list %}
+        <article>
+            <div class="card" style="width: inherit;">
+                {% if item.image %}
+                <img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+                {% else %}
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.title }}</h5>
+                  <p class="card-text">{{ item.description }}</p>
+                  <a href="{{ item.get_absolute_url }}" class="btn btn-primary">Ver Producto</a>
+                </div>
+              </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

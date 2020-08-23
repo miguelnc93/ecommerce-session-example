@@ -26,6 +26,11 @@ def upload_image_path(instance, filename):
 #         return self.get_queryset().filter(featured="False")
 # Create your models here.
 class Product(models.Model):
+    CATEGORIA_PRODUCTO = [
+        ('MUJER','MUJER'),
+        ('HOMBRE','HOMBRE'),
+        ('MERCADO','MERCADO')
+    ]
     title           = models.CharField(max_length=120)
     slug            = models.SlugField(blank=True, unique=True)
     description     = models.TextField()
@@ -34,13 +39,14 @@ class Product(models.Model):
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
     timestamp       = models.DateTimeField(auto_now_add=True)
+    categoria       = models.CharField(max_length=20, choices=CATEGORIA_PRODUCTO,blank=True, null=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
 #        return "/products/{slug}/".format(slug=self.slug)
-        return reverse("detail", kwargs={"slug":self.slug})
+        return reverse("product:detail", kwargs={"slug":self.slug})
 
 
 class Tag(models.Model):
